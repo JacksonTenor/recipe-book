@@ -1,0 +1,68 @@
+
+<div class="card">
+    <!-- Appears when content is collapsed -->
+
+    <div class="card-header" id="heading<%=recipes[i].id%>">
+        <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<%=recipes[i].id%>" aria-expanded="false" aria-controls="collapse<%=recipes[i].id%>">
+                <%= recipes[i].name%>
+            </button>
+        </h5>
+    </div>
+
+    <!-- Appears when content is expanded -->
+    <div id="collapse<%=recipes[i].id%>" class="collapse" aria-labelledby="heading<%=recipes[i].id%>" data-parent="#accordion">
+        <div class="card-body">
+            <p>
+                <strong>Ingredients: </strong>
+                <%= recipes[i].ingredients%>
+            </p>
+            <p>
+                <strong>Directions: </strong>
+                <%= recipes[i].directions%>
+            </p>
+            <button data-toggle="modal" data-target="#edit<%=recipes[i].id%>" class="btn btn-default edit-recipe">
+                <span class="fa fa-edit"></span>
+            </button>
+            <button onClick="deleteRecipe(<%=recipes[i].id%>)" class="btn btn-danger delete-recipe">
+                <span class="fa fa-trash"> </span>
+            </button>
+        </div>
+    </div>
+    <!-- Add Recipe Modal-->
+    <div class="modal fade" id="edit<%= recipes[i].id %>" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" action="/recipes/update/<%= recipes[i].id %>">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Recipe</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Recipe Name</label>
+                            <input type="text" class="form-control" name="name" aria-describedby="name" value="<%= recipes[i].name%>">
+                            <small id="emailHelp" class="form-text text-muted">Keep it short and simple.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="ingredients">Ingredients</label>
+                            <textarea class="form-control" name="ingredients" ><%=recipes[i].ingredients%></textarea>
+                            <small id="ingredientsHelp" class="form-text text-muted">Separate each ingredient by commas. Remember to add the amount.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="directions">Directions</label>
+                            <textarea class="form-control" name="directions"><%=recipes[i].directions%></textarea>
+                            <small id="directionsHelp" class="form-text text-muted"> Be sure to include every step.</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
