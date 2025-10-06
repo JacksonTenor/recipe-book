@@ -50,14 +50,22 @@ app.post("/recipes", function(req,res){
 
 //Gets a list of all recipes
 app.get("/recipes", function(req,res,next){
-   db.query('SELECT * FROM recipes', [], (err, response) => {
-       if(err) {
-           next(err);
-       }
-        res.render('pages/recipes', {
-            recipes: response.rows
-        })
-   });
+//    db.query('SELECT * FROM recipes', [], (err, response) => {
+//        if(err) {
+//            next(err);
+//        }
+//         res.render('pages/recipes', {
+//             recipes: response.rows
+//         })
+//    });
+    res.render('pages/recipes', {
+        recipes: [{
+            ingredients: "test",
+            directions: "make food",
+            id: 3,
+            name: "krabby patty secret formula"
+        }]
+    })
 });
 
 //Turns on server
